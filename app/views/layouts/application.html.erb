@@ -1,0 +1,70 @@
+<script>
+    setTimeout("$('.error_msgs').fadeOut('slow')", 6000)
+    setTimeout("$('.success_msgs').fadeOut('slow')", 3000)
+</script>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cap'nShare</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <!-- Navigation Bar -->
+    <!-- <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse"> -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <div class="container">
+        <%= link_to "Cap'nShare", root_path, class: "navbar-brand" %>
+        <ul class="navbar-nav">    
+           <% if user_signed_in? %>
+              <li class="nav-item"><%= link_to "About", about_path, class: "nav-link" %></li>
+              <li class="nav-item"><%= link_to "Contact Us", contactus_path, class: "nav-link" %></li>
+              <li class="nav-item pull-md-right"><%= link_to "Log out", signout_path, method: :delete,  class: "nav-link" %></li>
+           <% else %>
+           
+              <li class="nav-item pull-md-right"><%= link_to "Log In", signin_path, class: "nav-link" %></li>
+              <li class="nav-item pull-md-right"><%= link_to "Sign Up", signup_path, class: "btn btn-secondary nav-link" %></li>
+
+            <% end %>
+
+
+        </ul>
+      </div>
+    </nav>
+
+    <span class="success_msgs"> 
+      <% if notice %>
+        <p class="alert alert-success">
+          <%= notice %>
+        </p> 
+      <% end %> 
+    </span>
+
+    <span class="error_msgs"> 
+      <% if alert %>
+        <p class="alert alert-danger">
+          <%= alert%>
+          </p> 
+        <% end %> 
+    </span> 
+    
+    <!-- Page Content -->
+    <%= yield %>
+    
+    <!-- Footer -->
+    <footer class="small text-muted">
+      <div class="container">
+        <hr>
+        <center>
+          <p>© CS562 ~Class of 2019~ Cap'nShare</p>
+        </center>
+      </div>
+    </footer>
+
+  </body>
+</html>
